@@ -1,0 +1,38 @@
+version: "3.7"
+services:
+  db:
+    container_name: "db"
+    image: postgres:alpine
+    restart: always
+    environment:
+      - POSTGRES_DB=linx-cart
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    ports:
+      - 5432:5432
+  redis:
+    container_name: "redis"
+    image: redis:alpine
+    restart: always
+    ports:
+      - 6379:6379
+    
+  api:
+    container_name: "api"
+    build: .
+    
+    ports:
+      - "3000:3000"
+    depends_on: 
+      - db
+    links: 
+      - db
+      - redis
+    volumes:
+      - .:/usr/app
+    command: yarn dev:server
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "5"

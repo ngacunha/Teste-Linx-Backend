@@ -8,6 +8,12 @@ beforeAll(async () => {
 
 beforeEach(async () => {
   await connection.query("DELETE FROM users WHERE email='user@tester.com'");
+  await connection.query(
+    "DELETE FROM users WHERE email='usertestauth@tester.com'",
+  );
+  await connection.query(
+    "DELETE FROM users WHERE email='usertestnoauth@tester.com'",
+  );
 });
 
 afterAll(async () => {

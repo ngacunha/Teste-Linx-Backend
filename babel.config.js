@@ -6,8 +6,17 @@ module.exports = {
   plugins: [
     ['module-resolver', {
       alias: {
-        // '@example': './src/example',
+        '@errors': './src/errors',
+        '@services': './src/services',
+        '@routes': './src/routes',
+        '@config': './src/config',
+        '@repositories': './src/repositories',
+        '@models': './src/models',
+        '@middlewares': './src/middlewares',
+        '@utils': './src/utils',
+        '@controllers': './src/controllers'
       }
+
     }],
     'babel-plugin-transform-typescript-metadata',
     ['@babel/plugin-proposal-decorators', { 'legacy': true }],

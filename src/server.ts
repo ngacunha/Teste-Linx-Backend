@@ -1,19 +1,21 @@
-/* eslint-disable no-console */
 import 'reflect-metadata';
 import express from 'express';
+import 'express-async-errors';
 
-import './database';
+import errorHandling from '@middlewares/errorHandling';
+
+import createConnection from './database';
+import routes from './routes';
+
+createConnection();
 
 const app = express();
 
 app.use(express.json());
-
-app.get('/', (request, response) => {
-  return response.json({ message: 'Hello World!' });
-});
-
-const port = process.env.SERVER_PORT;
+app.use(routes);
+app.use(errorHandling);
 
 app.listen(3000, '0.0.0.0', () =>
-  console.log(`Server Started! on port ${port}`),
+  // eslint-disable-next-line no-console
+  console.log(`Server Started!`),
 );

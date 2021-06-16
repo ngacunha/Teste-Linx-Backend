@@ -13,6 +13,7 @@ module.exports = {
     process.env.NODE_ENV === 'development' ? './src/database/migrations/*.ts' : './dist/database/migrations/*.js'
   ],
   cli: {
-    migrationsDir: './src/database/migrations'
+    entitiesDir: process.env.NODE_ENV === 'development' ? './src/models/' : './dist/models',
+    migrationsDir:  process.env.NODE_ENV === 'development' ? './src/database/migrations' : './dist/database/migrations'
   }
 }

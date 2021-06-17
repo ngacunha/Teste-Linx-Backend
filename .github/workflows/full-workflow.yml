@@ -43,6 +43,7 @@ jobs:
         DB_USER: postgres
         DB_PASSWORD: postgres
         DB_NAME: postgres
+        NODE_ENV: development
 
     - name: Install dependencies
       run: yarn --frozen-lockfile

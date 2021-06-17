@@ -1,12 +1,15 @@
 import Redis from 'ioredis';
+import 'dotenv/config';
 
+const host = process.env.REDIS_HOST;
+const port = Number(process.env.REDIS_PORT);
 class Cache {
   redis: Redis.Redis;
 
   constructor() {
     this.redis = new Redis({
-      host: process.env.REDIS_HOST || 'localhost',
-      port: Number(process.env.PORT) || 6379,
+      host,
+      port,
       keyPrefix: 'cache:',
     });
   }

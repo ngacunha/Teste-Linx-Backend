@@ -1,6 +1,7 @@
 import 'reflect-metadata';
 import express from 'express';
 import 'express-async-errors';
+import 'dotenv/config';
 
 import errorHandling from '@middlewares/errorHandling';
 
@@ -15,7 +16,7 @@ app.use(express.json());
 app.use(routes);
 app.use(errorHandling);
 
-app.listen(3000, '0.0.0.0', () =>
+app.listen(3000, () =>
   // eslint-disable-next-line no-console
   console.log(`Server Started!`),
 );

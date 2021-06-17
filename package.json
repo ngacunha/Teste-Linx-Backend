@@ -4,10 +4,11 @@
    "main": "index.js",
    "license": "MIT",
    "scripts": {
-      "dev:server": "ts-node-dev -r tsconfig-paths/register --inspect --transpile-only --ignore-watch node_modules src/server.ts",
-      "start": "ts-node src/index.ts",
+      "dev:server": "cross-env NODE_ENV=development ts-node-dev -r tsconfig-paths/register --inspect --transpile-only --ignore-watch node_modules src/server.ts",
+      "start": "cross-env NODE_ENV=production pm2 start dist/server.js --watch --no-daemon",
       "build": "babel src --extensions \".js,.ts\" --out-dir dist --copy-files",
-      "typeorm": "ts-node-dev -r tsconfig-paths/register ./node_modules/typeorm/cli.js",
+      "typeorm": "ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js",
+      "run:migrations": "typeorm migration:run",
       "test": "cross-env NODE_ENV=development jest"
    },
    "dependencies": {
@@ -19,6 +20,7 @@
       "jsonwebtoken": "^8.5.1",
       "mysql": "^2.14.1",
       "pg": "^8.6.0",
+      "pm2": "^5.1.0",
       "reflect-metadata": "^0.1.10",
       "typeorm": "0.2.34",
       "yup": "^0.32.9"

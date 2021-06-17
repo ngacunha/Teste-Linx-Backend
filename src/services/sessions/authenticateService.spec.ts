@@ -3,7 +3,7 @@ import User from '@models/User';
 import { getRepository } from 'typeorm';
 import AuthenticateService from './authenticateService';
 
-describe('Register User', () => {
+describe('Authentication User', () => {
   it('should be able to Auth User', async () => {
     const authenticateService = new AuthenticateService();
     const userRepository = getRepository(User);

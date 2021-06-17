@@ -60,10 +60,16 @@ jobs:
       
     - name: Deploy to Heroku
     - uses: akhileshns/heroku-deploy@v3.12.12 
-        with:
-          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-          heroku_app_name: "test-linx-backend"
-          heroku_email: HEROKU_EMAIL
-          appdir: "/" # <- This will point to the api folder in your project
+      with:
+        heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+        heroku_app_name: "test-linx-backend"
+        heroku_email: HEROKU_EMAIL
+        usedocker: true
+          docker_build_args: |
+            NODE_ENV
+          
+        env:
+          NODE_ENV: production
+          
  
       

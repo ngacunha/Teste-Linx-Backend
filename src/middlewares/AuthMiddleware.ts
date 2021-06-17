@@ -9,7 +9,7 @@ interface TokenPayLoad {
   exp: number;
 }
 
-export default function AuthMiddleware(
+export default function authMiddleware(
   request: Request,
   response: Response,
   next: NextFunction,

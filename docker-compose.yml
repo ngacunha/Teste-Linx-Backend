@@ -42,7 +42,8 @@ services:
       - .:/usr/app
     command: >
       sh -c "
-      yarn typeorm migration:run
+      yarn --frozen-lockfile
+      && yarn typeorm migration:run
       && yarn build
       && yarn start
       "

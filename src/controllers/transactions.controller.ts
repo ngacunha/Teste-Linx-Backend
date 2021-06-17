@@ -1,4 +1,5 @@
 import CreateTransactionService from '@services/transactions/createTransactionService';
+import ListAllTransactionsService from '@services/transactions/listAllTransactionsService';
 import { Request, Response } from 'express';
 
 async function newTransaction(
@@ -18,5 +19,13 @@ async function newTransaction(
   return response.status(200).json(transaction);
 }
 
+async function historyAllTransactions(
+  request: Request,
+  response: Response,
+): Promise<Response> {
+  const listAllTransactionsService = new ListAllTransactionsService();
+  const transations = await listAllTransactionsService.execute();
+  return response.status(200).json(transations);
+}
 // eslint-disable-next-line import/prefer-default-export
-export { newTransaction };
+export { newTransaction, historyAllTransactions };

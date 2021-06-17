@@ -2,6 +2,7 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  JoinColumn,
   OneToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
@@ -25,6 +26,7 @@ class Transaction {
   @OneToOne(() => CreditCard, {
     cascade: true,
   })
+  @JoinColumn()
   credit_card: CreditCard;
 
   @CreateDateColumn()

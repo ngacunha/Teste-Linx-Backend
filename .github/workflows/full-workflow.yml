@@ -1,0 +1,55 @@
+name: Complete Workflow
+
+on: ['push']
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [14.x]
+
+    services:
+      # Label used to access the service container
+      postgres:
+        # Docker Hub image
+        image: postgres:alpine
+        # Provide the password for postgres
+        env:
+          POSTGRES_PASSWORD: postgres
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          # Maps tcp port 5432 on service container to the host
+          - 5432:5432
+
+    steps:
+      -uses: actions/checkout@v2
+      -run: git fetch --prune --unshallow
+
+      -name: Use Node.js ${{ matrix.node-version }}
+      -uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+        env:
+          DB_HOST=localhost
+          DB_PORT=5432
+          DB_USER=postgres
+          DB_PASSWORD=postgres
+          DB_NAME=postgres
+
+
+      --name: Install Dependencies
+        run: yarn --frozen-lockfile
+
+      --name: Run Migrations
+        run: yarn run:migrations
+
+      --name: Run all tests
+        run: yarn test

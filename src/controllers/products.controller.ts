@@ -1,4 +1,5 @@
 import CreateProductService from '@services/products/createProductService';
+import ListProductsService from '@services/products/listProductsService';
 import { Request, Response } from 'express';
 
 async function createProduct(
@@ -18,5 +19,14 @@ async function createProduct(
   return response.status(200).json(newProduct);
 }
 
+async function listProducts(
+  request: Request,
+  response: Response,
+): Promise<Response> {
+  const listProductsService = new ListProductsService();
+  const products = await listProductsService.execute();
+
+  return response.status(200).json(products);
+}
 // eslint-disable-next-line import/prefer-default-export
-export { createProduct };
+export { createProduct, listProducts };

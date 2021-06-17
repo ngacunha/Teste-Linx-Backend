@@ -37,11 +37,11 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
       env:
-        DB_HOST=localhost
-        DB_PORT=5432
-        DB_USER=postgres
-        DB_PASSWORD=postgres
-        DB_NAME=postgres
+        DB_HOST: localhost
+        DB_PORT: 5432
+        DB_USER: postgres
+        DB_PASSWORD: postgres
+        DB_NAME: postgres
 
     - name: Install dependencies
       run: yarn --frozen-lockfile
